@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fengxin.mapper.EmployeeMapper">
+    <!-- 专注于sql-->
+    <select id="queryById" resultType="com.fengxin.pojo.Employee">
+<!--        #{}:占位符 + 赋值 empId = ? 防止sql注入问题 只能设置值 推荐-->
+<!--        ${}:字符串拼接 "empId" + id  可以动态 表名 列名 sql关键字-->
+        select emp_id empId,emp_name empName, emp_salary empSalary from
+        t_emp where emp_id = #{empId}
+    </select>
+</mapper>

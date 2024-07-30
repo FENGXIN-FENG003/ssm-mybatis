@@ -10,6 +10,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>mybatis-part01</module>
+        <module>mybatis-part02</module>
     </modules>
     <dependencies>
         <!-- mybatis依赖 -->
