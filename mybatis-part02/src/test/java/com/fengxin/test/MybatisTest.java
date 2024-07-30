@@ -32,4 +32,5 @@ public class MybatisTest {
         // 关闭
         session.close ();
     }
+    
 }

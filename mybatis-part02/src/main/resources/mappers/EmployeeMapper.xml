@@ -3,11 +3,37 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fengxin.mapper.EmployeeMapper">
+
     <!-- 专注于sql-->
     <select id="queryById" resultType="com.fengxin.pojo.Employee">
-<!--        #{}:占位符 + 赋值 empId = ? 防止sql注入问题 只能设置值 推荐-->
-<!--        ${}:字符串拼接 "empId" + id  可以动态 表名 列名 sql关键字-->
+        <!--#{}:占位符 + 赋值 empId = ? 防止sql注入问题 只能设置值 推荐-->
+        <!--${}:字符串拼接 "empId" + id  可以动态 表名 列名 sql关键字-->
         select emp_id empId,emp_name empName, emp_salary empSalary from
         t_emp where emp_id = #{empId}
     </select>
+
+    <!-- 1.简单类型传入 Integer int String 单值 #{名随意}-->
+    <delete id="deleteById">
+        delete from t_emp where emp_id = #{id}
+    </delete>
+    <select id="queryBySalary" resultType="com.fengxin.pojo.Employee">
+        select emp_id empId,emp_name empName, emp_salary empSalary from
+        t_emp where emp_salary = #{salary}
+    </select>
+
+    <!-- 2.实体类型传入 Employee #{类中属性}-->
+    <insert id="insertEmp">
+        insert into t_emp(emp_name,emp_salary) values(#{empName},#{empSalary})
+    </insert>
+
+    <!-- 3.零散简单类型传入 #{@param(value)}-->
+    <select id="queryByIdAndSalary" resultType="com.fengxin.pojo.Employee">
+        select emp_id empId,emp_name empName, emp_salary empSalary from
+        t_emp where emp_id = #{a} and emp_salary = #{b}
+    </select>
+
+    <!-- 4.map类型传入 #{map的key}-->
+    <insert id="insertEmpMap">
+        insert into t_emp(emp_name,emp_salary) values(#{name},#{salary})
+    </insert>
 </mapper>
