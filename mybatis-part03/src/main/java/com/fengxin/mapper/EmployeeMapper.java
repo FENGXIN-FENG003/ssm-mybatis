@@ -23,4 +23,9 @@ public interface EmployeeMapper {
      */
     Map<String,Object> selectEmpNameAndMaxSalary();
     
+    /**
+     * 插入员工数据 并进行主键回显
+     * @return int
+     */
+    int insertEmp(Employee employee);
 }
