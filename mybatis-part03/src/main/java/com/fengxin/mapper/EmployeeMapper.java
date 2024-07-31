@@ -15,4 +15,12 @@ public interface EmployeeMapper {
     Employee queryEmpById(Integer id);
     Double querySalaryById(Integer id);
     
+    /**
+     * 返回查询结果的map
+     * 适用于SQL查询返回的各个字段综合起来并不和任何一个现有的实体类对应，没法封装到实体类对象中。
+     * 能够封装成实体类类型的，就不使用Map类型
+     * @return map
+     */
+    Map<String,Object> selectEmpNameAndMaxSalary();
+    
 }
