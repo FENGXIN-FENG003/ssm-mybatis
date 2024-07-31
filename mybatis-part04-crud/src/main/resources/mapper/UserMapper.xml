@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fengxin.mapper.UserMapper">
+<!--    int insert(User user);-->
+    <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        INSERT INTO user(username,password) VALUES  (#{username},#{password})
+    </insert>
+<!--    int update(User user);-->
+    <update id="update">
+        UPDATE user SET username=#{username}, password=#{password}
+        WHERE id=#{id}
+    </update>
+<!--    int delete(Integer id);-->
+    <delete id="delete">
+        DELETE FROM user WHERE id=#{id}
+    </delete>
+<!--    User selectById(Integer id);-->
+    <select id="selectById" resultType="User">
+        SELECT id, username, password FROM user WHERE id=#{id}
+    </select>
+<!--    List<User> selectAll();-->
+    <select id="selectAll" resultType="User">
+        SELECT id, username, password FROM user
+    </select>
+</mapper>

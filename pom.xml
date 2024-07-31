@@ -12,6 +12,7 @@
         <module>mybatis-part01</module>
         <module>mybatis-part02</module>
         <module>mybatis-part03</module>
+        <module>mybatis-part04-crud</module>
     </modules>
     <dependencies>
         <!-- mybatis依赖 -->
@@ -33,6 +34,11 @@
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
             <version>5.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.34</version>
         </dependency>
     </dependencies>
     <properties>
