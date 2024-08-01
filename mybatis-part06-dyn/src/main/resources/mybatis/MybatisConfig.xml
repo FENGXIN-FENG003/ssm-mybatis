@@ -3,28 +3,19 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-<!--    对一，属性中包含对方对象
-        对多，属性中包含对方对象集合
-        只有真实发生多表查询时，才需要设计和修改实体类，否则不提前设计和修改实体类！
-        无论多少张表联查，实体类设计都是两两考虑!
-        在查询映射的时候，只需要关注本次查询相关的属性！例如：查询订单和对应的客户，就不要关注客户中的订单集合！-->
-<!--    实际开发时，一般在开发过程中，不给数据库表设置外键约束。
-        原因是避免调试不方便。
-        一般是功能开发完成，再加外键约束检查是否有bug。-->
+
     <settings>
         <setting name="logImpl" value="STDOUT_LOGGING"/>
         <setting name="mapUnderscoreToCamelCase" value="true"/>
     </settings>
-
     <typeAliases>
         <package name="com.fengxin.pojo"/>
     </typeAliases>
-
     <environments default="development">
-
         <environment id="development">
             <transactionManager type="JDBC"/>
             <dataSource type="POOLED">
+                <!-- 建立数据库连接的具体信息 -->
                 <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
                 <property name="url" value="jdbc:mysql://localhost:3306/mybatis-example"/>
                 <property name="username" value="root"/>
@@ -34,8 +25,7 @@
     </environments>
 
     <mappers>
-        <mapper resource="mappers/OrderMapper.xml"/>
-        <mapper resource="mappers/CustomerMapper.xml"/>
+        <mapper resource="mappers/EmployeeMapper.xml"/>
     </mappers>
 
 </configuration>

@@ -1,9 +1,11 @@
-package com.fengxin;
+package com.fengxin;/**
+ * @author FENGXIN
+ * @date 2024/8/1
+ * @project ssm-mybatis-part
+ **/
 
-import com.fengxin.mapper.CustomerMapper;
-import com.fengxin.mapper.OrderMapper;
-import com.fengxin.pojo.Customer;
-import com.fengxin.pojo.Order;
+import com.fengxin.mapper.EmployeeMapper;
+import com.fengxin.pojo.Employee;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -16,12 +18,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-/**
- * @author FENGXIN
- * @date 2024/8/1
- * @project ssm-mybatis-part
- **/
-public class MulTest {
+public class DynTest {
     private SqlSession session;
     
     @BeforeEach
@@ -30,18 +27,11 @@ public class MulTest {
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder ().build (is);
         session = sqlSessionFactory.openSession (true);
     }
-    @Test
-    public void testToOne(){
-        OrderMapper mapper = session.getMapper (OrderMapper.class);
-        Order order = mapper.queryOrderById (1);
-        System.out.println ("order = " + order);
-    }
     
     @Test
-    public void testToMul(){
-        CustomerMapper mapper = session.getMapper (CustomerMapper.class);
-        List<Customer> customers = mapper.queryCustomerAll ();
-        System.out.println ("customers = " + customers);
+    public void whereAndIf(){
+        List<Employee> list = session.getMapper (EmployeeMapper.class).query (null,777.77);
+        System.out.println ("list = " + list);
     }
     
     @AfterEach

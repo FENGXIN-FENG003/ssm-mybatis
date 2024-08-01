@@ -14,6 +14,7 @@
         <module>mybatis-part03</module>
         <module>mybatis-part04-crud</module>
         <module>mybatis-part05-mul</module>
+        <module>mybatis-part06-dyn</module>
     </modules>
     <dependencies>
         <!-- mybatis依赖 -->

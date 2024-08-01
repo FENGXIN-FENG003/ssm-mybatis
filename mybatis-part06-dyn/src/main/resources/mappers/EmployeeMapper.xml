@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace等于mapper接口类的全限定名,这样实现对应 -->
+<mapper namespace="com.fengxin.mapper.EmployeeMapper">
+    <!--
+        where:  1.where标签会自动去掉“标签体内前面多余的and/or”
+                2.决定满足或不满足条件时WHERE的添加或删除
+        if: 满足条件加入sql语句
+     -->
+    <select id="query" resultType="employee">
+        select * from t_emp
+        <where>
+            <if test="empName != null">
+                emp_name = #{empName}
+            </if>
+            <if test="empSalary != null and empSalary > 200">
+                and emp_salary = #{empSalary}
+            </if>
+        </where>
+    </select>
+</mapper>

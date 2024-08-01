@@ -10,5 +10,6 @@ import lombok.Data;
 public class Order {
     private int orderId;
     private String orderName;
+    // 对一映射
     private Customer customer;
 }
