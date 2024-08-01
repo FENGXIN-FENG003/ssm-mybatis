@@ -20,4 +20,93 @@
             </if>
         </where>
     </select>
+
+    <!--
+        set:  1.自动去掉多余的','
+              2.SET的添加或删除
+     -->
+    <update id="update">
+        update t_emp
+        <set>
+            <if test="empName != null">
+                emp_name = #{empName},
+            </if>
+            <if test="empSalary != null">
+                emp_salary = #{empSalary}
+            </if>
+        </set>
+        where emp_id = #{empId}
+    </update>
+
+    <!--trim：
+    prefix属性：指定要动态添加的前缀
+    suffix属性：指定要动态添加的后缀
+    prefixOverrides属性：指定要动态去掉的前缀，使用“|”分隔有可能的多个值
+    suffixOverrides属性：指定要动态去掉的后缀，使用“|”分隔有可能的多个值-->
+    <select id="queryTrim" resultType="employee">
+        select * from t_emp
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="empName != null">
+                emp_name = #{empName}
+            </if>
+            <if test="empSalary != null and empSalary > 200">
+                and emp_salary = #{empSalary}
+            </if>
+        </trim>
+    </select>
+
+    <!--choose：
+    在多个分支条件中，仅执行一个
+    从上到下依次执行条件判断
+    遇到的第一个满足条件的分支会被采纳
+    被采纳分支后面的分支都将不被考虑
+    如果所有的when分支都不满足，那么就执行otherwise分支-->
+    <select id="queryChoose" resultType="employee">
+        select * from t_emp
+        where
+            <choose>
+                <when test="empName != null">
+                    emp_name = #{empName}
+                </when>
+                <when test="empSalary != null and empSalary > 200">
+                    and emp_salary = #{empSalary}
+                </when>
+                <otherwise>
+                    1 = 1
+                </otherwise>
+            </choose>
+    </select>
+
+    <!-- 批量操作-->
+    <select id="queryBacth" resultType="employee">
+        select * from t_emp
+        where emp_id in
+        <foreach collection="ids" open="(" separator="," close=")" item="id">
+            #{id}
+        </foreach>
+    </select>
+    <delete id="deleteBacth">
+        delete t_emp
+        where emp_id in
+        <foreach collection="ids" open="(" separator="," close=")" item="id">
+            #{id}
+        </foreach>
+    </delete>
+<!--    在foreach标签内部如果需要引用遍历得到的具体的一个对象，需要使用item属性声明的名称-->
+    <insert id="insertBacth">
+        insert into t_emp(emp_name,emp_salary)
+        values
+        <foreach collection="employees" separator="," item="emp">
+            (#{emp.empName},#{emp.empSalary})
+        </foreach>
+    </insert>
+    <!--一次性发送多条SQL语句让数据库执行
+    需要在数据库连接信息的URL地址中设置
+    atguigu.dev.url=jdbc:mysql:///mybatis-example?allowMultiQueries=true-->
+    <update id="updateBacth">
+        <foreach collection="employees" item="emp">
+            update t_emp set emp_name = #{emp.empName},emp_salary = #{emp.empSalary}
+            where empId = #{emp.empId}
+        </foreach>
+    </update>
 </mapper>
