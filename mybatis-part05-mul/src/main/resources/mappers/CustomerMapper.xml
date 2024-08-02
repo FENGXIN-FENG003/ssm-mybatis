@@ -4,7 +4,7 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fengxin.mapper.CustomerMapper">
 <!--    列名=属性名，或者开启驼峰映射 默认第一层的result自动映射 但深层次的result不会自动映射-->
-<!--    autoMappingBehavior FULL 会自动映射任何复杂的结果集（无论是否嵌套）-->
+<!--    <setting中 autoMappingBehavior FULL 会自动映射任何复杂的结果集（无论是否嵌套）-->
     <resultMap id="customerMap" type="customer">
         <id column="customer_id" property="customerId"/>
         <result column="customer_name" property="customerName"/>

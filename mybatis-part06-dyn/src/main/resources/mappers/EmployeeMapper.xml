@@ -4,13 +4,19 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace等于mapper接口类的全限定名,这样实现对应 -->
 <mapper namespace="com.fengxin.mapper.EmployeeMapper">
+<!--    抽取重复的SQL片段-->
+    <sql id="selectSql">
+        select * from t_emp
+    </sql>
     <!--
         where:  1.where标签会自动去掉“标签体内前面多余的and/or”
                 2.决定满足或不满足条件时WHERE的添加或删除
         if: 满足条件加入sql语句
      -->
     <select id="query" resultType="employee">
-        select * from t_emp
+<!--        引用已抽取的SQL片段-->
+        <include refid="selectSql">
+        </include>
         <where>
             <if test="empName != null">
                 emp_name = #{empName}
@@ -44,7 +50,8 @@
     prefixOverrides属性：指定要动态去掉的前缀，使用“|”分隔有可能的多个值
     suffixOverrides属性：指定要动态去掉的后缀，使用“|”分隔有可能的多个值-->
     <select id="queryTrim" resultType="employee">
-        select * from t_emp
+        <include refid="selectSql">
+        </include>
         <trim prefix="where" prefixOverrides="and | or">
             <if test="empName != null">
                 emp_name = #{empName}
@@ -62,7 +69,8 @@
     被采纳分支后面的分支都将不被考虑
     如果所有的when分支都不满足，那么就执行otherwise分支-->
     <select id="queryChoose" resultType="employee">
-        select * from t_emp
+        <include refid="selectSql">
+        </include>
         where
             <choose>
                 <when test="empName != null">
@@ -79,7 +87,8 @@
 
     <!-- 批量操作-->
     <select id="queryBacth" resultType="employee">
-        select * from t_emp
+        <include refid="selectSql">
+        </include>
         where emp_id in
         <foreach collection="ids" open="(" separator="," close=")" item="id">
             #{id}
