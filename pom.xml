@@ -16,6 +16,7 @@
         <module>mybatis-part05-mul</module>
         <module>mybatis-part06-dyn</module>
         <module>mybatis-part07-mapper</module>
+        <module>mybatis-part08-orm</module>
     </modules>
     <dependencies>
         <!-- mybatis依赖 -->
