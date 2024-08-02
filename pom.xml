@@ -15,6 +15,7 @@
         <module>mybatis-part04-crud</module>
         <module>mybatis-part05-mul</module>
         <module>mybatis-part06-dyn</module>
+        <module>mybatis-part07-mapper</module>
     </modules>
     <dependencies>
         <!-- mybatis依赖 -->

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+    <environments default="development">
+        <environment id="development">
+            
+            <!-- Mybatis的内置的事务管理器 -->
+            <!-- MANAGED 不会自动开启事务 | JDBC 自动开启事务 自己提交事务  -->
+            <transactionManager type="JDBC"/>
+
+            <!-- 配置数据源 -->
+            <!-- POOLED Mybatis维护一个数据源-->
+            <!-- UNPOOLED 每次都需要创建、关闭一个数据源-->
+            <dataSource type="POOLED">
+                <!-- 建立数据库连接的具体信息 -->
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/mybatis-example"/>
+                <property name="username" value="root"/>
+                <property name="password" value="51213002"/>
+            </dataSource>
+
+        </environment>
+    </environments>
+<!--    Mapper批量映射优化-->
+    <!--Mapper 接口和 Mapper 配置文件名称一致
+    Mapper 配置文件放在 Mapper 接口所在的包内
+    在resources下创建mapper接口包一致的文件夹结构存放mapperxml文件-->
+    <mappers>
+        <package name="com.fengxin.mapper"/>
+    </mappers>
+
+</configuration>
