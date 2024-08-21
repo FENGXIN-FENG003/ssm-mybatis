@@ -37,7 +37,7 @@
 <!--    Mapper批量映射优化-->
     <!--Mapper 接口和 Mapper 配置文件名称一致
     Mapper 配置文件放在 Mapper 接口所在的包内
-    在resources下创建mapper接口包一致的文件夹结构存放mapperxml文件-->
+    在resources下创建mapper接口包一致的文件夹结构存放mapper.xml文件-->
     <mappers>
         <package name="com.fengxin.mapper"/>
     </mappers>

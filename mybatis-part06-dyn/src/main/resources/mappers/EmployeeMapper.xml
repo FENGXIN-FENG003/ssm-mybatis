@@ -106,12 +106,13 @@
         insert into t_emp(emp_name,emp_salary)
         values
         <foreach collection="employees" separator="," item="emp">
+            <!-- 集合类型是对象时，用·语法引用属性 item是对象别名-->
             (#{emp.empName},#{emp.empSalary})
         </foreach>
     </insert>
     <!--一次性发送多条SQL语句让数据库执行
     需要在数据库连接信息的URL地址中设置
-    atguigu.dev.url=jdbc:mysql:///mybatis-example?allowMultiQueries=true-->
+    url=jdbc:mysql:///mybatis-example?allowMultiQueries=true-->
     <update id="updateBacth">
         <foreach collection="employees" item="emp">
             update t_emp set emp_name = #{emp.empName},emp_salary = #{emp.empSalary}
